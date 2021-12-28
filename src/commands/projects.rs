@@ -1,4 +1,4 @@
-use prettytable::{format, Cell, Row, Table};
+use prettytable::{format, Table};
 use serde::{Deserialize, Serialize};
 
 use crate::client::Client;

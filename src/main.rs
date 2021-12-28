@@ -1,7 +1,7 @@
 #[macro_use]
 extern crate prettytable;
 
-use clap::{App, AppSettings, Arg, SubCommand};
+use clap::{App, AppSettings, SubCommand};
 
 mod client;
 mod commands;

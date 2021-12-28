@@ -1,4 +1,4 @@
-use prettytable::{format, Cell, Row, Table};
+use prettytable::{format, Table};
 
 use crate::client::Client;
 
