@@ -32,8 +32,6 @@ pub struct Client {
     url: String,
 }
 
-// url: String::from("https://api.todoist.com"),
-
 impl Client {
     pub fn new(url: String) -> Client {
         Client {
