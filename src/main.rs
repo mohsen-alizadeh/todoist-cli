@@ -2,12 +2,11 @@
 extern crate prettytable;
 
 use clap::{App, AppSettings, Arg, SubCommand};
-use std::collections::HashMap;
 
 mod client;
 mod commands;
 
-use commands::projects;
+use commands::{projects, tasks};
 
 fn main() {
     let app = App::new("Todoist Cli")
@@ -21,7 +20,7 @@ fn main() {
         .get_matches();
 
     match app.subcommand() {
-        ("list", Some(_)) => commands::list(),
+        ("list", Some(_)) => tasks::list(),
         ("projects", Some(_)) => projects::list(),
         _ => (),
     }
