@@ -32,11 +32,20 @@ pub struct Client {
     url: String,
 }
 
+impl Default for Client {
+    fn default() -> Self {
+        Self {
+            url: String::from("https://api.todoist.com"),
+            token: String::from(""),
+        }
+    }
+}
+
 impl Client {
-    pub fn new(url: String) -> Client {
+    pub fn new() -> Client {
         Client {
             token: format!("Bearer {}", String::from(env!("TODOIST_TOKEN"))),
-            url: url,
+            ..Default::default()
         }
     }
 
