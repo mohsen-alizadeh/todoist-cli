@@ -49,9 +49,9 @@ impl Client {
         }
     }
 
-    fn get(&self, path: &str) -> String {
+    pub fn get(&self, path: &str) -> String {
         reqwest::blocking::Client::new()
-            .get(self.path("/rest/v1/tasks"))
+            .get(self.path(path))
             .header(reqwest::header::AUTHORIZATION, self.token.clone())
             .send()
             .unwrap()

@@ -7,6 +7,8 @@ use std::collections::HashMap;
 mod client;
 mod commands;
 
+use commands::projects;
+
 fn main() {
     let app = App::new("Todoist Cli")
         .setting(AppSettings::SubcommandRequiredElseHelp)
@@ -19,7 +21,8 @@ fn main() {
         .get_matches();
 
     match app.subcommand() {
-        ("list", Some(list_sub)) => commands::list(),
+        ("list", Some(_)) => commands::list(),
+        ("projects", Some(_)) => projects::list(),
         _ => (),
     }
 }
