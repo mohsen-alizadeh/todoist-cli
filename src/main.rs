@@ -1,4 +1,9 @@
 use clap::{App, Arg, SubCommand};
+use std::collections::HashMap;
+
+mod client;
+
+use client::Client;
 
 fn main() {
     let app = App::new("Todoist Cli")
@@ -11,8 +16,16 @@ fn main() {
         .arg(Arg::with_name("file_name"))
         .get_matches();
 
-    match app.subcommand() {
-        ("list", Some(list_sub)) => println!("list selected"),
-        _ => println!("no command selected"),
-    }
+    list();
+    // match app.subcommand() {
+    //     ("list", Some(list_sub)) => list(),
+    //     _ => list()_
+    // }
+}
+
+fn list() {
+    // let c = Client::new();
+    // let list = c.list();
+    //
+    // println!("list : {:?}", list);
 }
