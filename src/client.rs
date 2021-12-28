@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
-struct Due {
+pub struct Due {
     date: String,
     string: String,
     lang: String,
@@ -10,21 +10,21 @@ struct Due {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Task {
-    id: isize,
-    assigner: isize,
-    project_id: isize,
-    section_id: isize,
-    order: isize,
+    pub id: isize,
+    pub assigner: isize,
+    pub project_id: isize,
+    pub section_id: isize,
+    pub order: isize,
     pub content: String,
-    description: String,
-    completed: bool,
-    label_ids: Vec<isize>,
-    priority: isize,
-    comment_count: isize,
-    creator: isize,
-    created: String,
-    due: Option<Due>,
-    url: String,
+    pub description: String,
+    pub completed: bool,
+    pub label_ids: Vec<isize>,
+    pub priority: isize,
+    pub comment_count: isize,
+    pub creator: isize,
+    pub created: String,
+    pub due: Option<Due>,
+    pub url: String,
 }
 
 pub struct Client {

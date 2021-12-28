@@ -1,3 +1,6 @@
+#[macro_use]
+extern crate prettytable;
+
 use clap::{App, AppSettings, Arg, SubCommand};
 use std::collections::HashMap;
 
