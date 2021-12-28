@@ -110,6 +110,7 @@ mod test {
         let client = Client::new(server.base_url());
         let list = client.list();
 
+        list_tasks.assert();
         assert_eq!(list.len(), 1);
 
         let task = list.get(0);
