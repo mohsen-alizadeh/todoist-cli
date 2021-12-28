@@ -10,20 +10,20 @@ struct Due {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Task {
-    id: usize,
-    assigner: usize,
-    project_id: usize,
-    section_id: usize,
-    order: usize,
-    content: String,
+    id: isize,
+    assigner: isize,
+    project_id: isize,
+    section_id: isize,
+    order: isize,
+    pub content: String,
     description: String,
     completed: bool,
-    label_ids: Vec<usize>,
-    priority: usize,
-    comment_count: usize,
-    creator: usize,
+    label_ids: Vec<isize>,
+    priority: isize,
+    comment_count: isize,
+    creator: isize,
     created: String,
-    due: Due,
+    due: Option<Due>,
     url: String,
 }
 

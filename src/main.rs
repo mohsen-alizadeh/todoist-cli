@@ -2,8 +2,7 @@ use clap::{App, Arg, SubCommand};
 use std::collections::HashMap;
 
 mod client;
-
-use client::Client;
+mod commands;
 
 fn main() {
     let app = App::new("Todoist Cli")
@@ -16,16 +15,8 @@ fn main() {
         .arg(Arg::with_name("file_name"))
         .get_matches();
 
-    list();
-    // match app.subcommand() {
-    //     ("list", Some(list_sub)) => list(),
-    //     _ => list()_
-    // }
-}
-
-fn list() {
-    // let c = Client::new();
-    // let list = c.list();
-    //
-    // println!("list : {:?}", list);
+    match app.subcommand() {
+        ("list", Some(list_sub)) => commands::list(),
+        _ => (),
+    }
 }
