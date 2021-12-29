@@ -1,7 +1,7 @@
 #[macro_use]
 extern crate prettytable;
 
-use clap::{App, AppSettings, SubCommand};
+use clap::{App, AppSettings, Arg, SubCommand};
 
 mod client;
 mod commands;
@@ -15,13 +15,21 @@ fn main() {
         .author(env!("CARGO_PKG_AUTHORS"))
         .about("Todoist Cli")
         .subcommand(SubCommand::with_name("list").about("List tasks"))
-        .subcommand(SubCommand::with_name("show").about("Show a task"))
+        .subcommand(
+            SubCommand::with_name("show")
+                .about("Show a task")
+                .arg(Arg::with_name("task_id")),
+        )
         .subcommand(SubCommand::with_name("projects").about("List of projects"))
         .get_matches();
 
     match app.subcommand() {
         ("list", Some(_)) => tasks::list(),
         ("projects", Some(_)) => projects::list(),
+        ("show", Some(args)) => {
+            let id: isize = args.value_of("task_id").unwrap().parse().unwrap();
+            tasks::show(id)
+        }
         _ => (),
     }
 }
