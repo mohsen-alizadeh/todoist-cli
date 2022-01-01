@@ -54,9 +54,20 @@ pub struct ItemDue {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+pub struct Label {
+    pub color: isize,
+    pub id: isize,
+    pub is_deleted: isize,
+    pub is_favorite: isize,
+    pub item_order: isize,
+    pub name: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Cache {
     pub filters: Vec<Filter>,
     pub items: Vec<Item>,
+    pub labels: Vec<Label>,
 }
 
 pub fn read() -> Cache {
