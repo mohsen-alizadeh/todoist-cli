@@ -8,7 +8,7 @@ use log::{debug, info};
 mod client;
 mod commands;
 
-use commands::{labels, projects, sync, tasks};
+use commands::{filters, labels, projects, sync, tasks};
 
 fn main() {
     env_logger::init();
@@ -29,10 +29,12 @@ fn main() {
         .subcommand(SubCommand::with_name("projects").about("List of projects"))
         .subcommand(SubCommand::with_name("labels").about("List of labels"))
         .subcommand(SubCommand::with_name("sync").about("sync with Todoist"))
+        .subcommand(SubCommand::with_name("filters").about("List of filters"))
         .get_matches();
 
     match app.subcommand() {
         ("list", Some(_)) => tasks::list(),
+        ("filters", Some(_)) => filters::list(),
         ("projects", Some(_)) => projects::list(),
         ("labels", Some(_)) => labels::list(),
         ("sync", Some(_)) => sync(),
