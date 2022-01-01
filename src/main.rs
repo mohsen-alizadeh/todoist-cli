@@ -2,6 +2,9 @@
 extern crate prettytable;
 
 use clap::{App, AppSettings, Arg, SubCommand};
+use env_logger;
+use log::{debug, info};
+// use log::{debug, info};
 
 mod client;
 mod commands;
@@ -9,6 +12,10 @@ mod commands;
 use commands::{labels, projects, sync, tasks};
 
 fn main() {
+    env_logger::init();
+
+    debug!("main is started");
+
     let app = App::new("Todoist Cli")
         .setting(AppSettings::SubcommandRequiredElseHelp)
         .version(env!("CARGO_PKG_VERSION"))
