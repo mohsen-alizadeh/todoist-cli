@@ -6,7 +6,7 @@ use clap::{App, AppSettings, Arg, SubCommand};
 mod client;
 mod commands;
 
-use commands::{labels, projects, tasks};
+use commands::{labels, projects, sync, tasks};
 
 fn main() {
     let app = App::new("Todoist Cli")
@@ -22,12 +22,14 @@ fn main() {
         )
         .subcommand(SubCommand::with_name("projects").about("List of projects"))
         .subcommand(SubCommand::with_name("labels").about("List of labels"))
+        .subcommand(SubCommand::with_name("sync").about("sync with Todoist"))
         .get_matches();
 
     match app.subcommand() {
         ("list", Some(_)) => tasks::list(),
         ("projects", Some(_)) => projects::list(),
         ("labels", Some(_)) => labels::list(),
+        ("sync", Some(_)) => sync(),
         ("show", Some(args)) => {
             let id: isize = args.value_of("task_id").unwrap().parse().unwrap();
             tasks::show(id)
