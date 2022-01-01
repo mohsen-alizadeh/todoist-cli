@@ -64,10 +64,27 @@ pub struct Label {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+pub struct Project {
+    pub child_order: isize,
+    pub collapsed: isize,
+    pub color: isize,
+    pub has_more_notes: bool,
+    pub id: isize,
+    pub inbox_project: Option<bool>,
+    pub is_archived: isize,
+    pub is_deleted: isize,
+    pub is_favorite: isize,
+    pub name: String,
+    pub parent_id: Option<isize>,
+    pub shared: bool,
+    pub sync_id: Option<isize>,
+}
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Cache {
     pub filters: Vec<Filter>,
     pub items: Vec<Item>,
     pub labels: Vec<Label>,
+    pub projects: Vec<Project>,
 }
 
 pub fn read() -> Cache {
