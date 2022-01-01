@@ -4,7 +4,6 @@ extern crate prettytable;
 use clap::{App, AppSettings, Arg, SubCommand};
 use env_logger;
 use log::{debug, info};
-// use log::{debug, info};
 
 mod client;
 mod commands;
