@@ -9,7 +9,7 @@ mod cache;
 mod client;
 mod commands;
 
-use commands::{filters, labels, projects, sync, tasks};
+use commands::{filters, labels, projects, tasks};
 
 fn main() {
     env_logger::init();
@@ -38,7 +38,6 @@ fn main() {
         ("filters", Some(_)) => filters::list(),
         ("projects", Some(_)) => projects::list(),
         ("labels", Some(_)) => labels::list(),
-        ("sync", Some(_)) => sync(),
         ("show", Some(args)) => {
             let id: isize = args.value_of("task_id").unwrap().parse().unwrap();
             tasks::show(id)
