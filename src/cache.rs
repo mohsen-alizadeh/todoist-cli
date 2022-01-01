@@ -18,8 +18,45 @@ pub struct Filter {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+pub struct Item {
+    pub added_by_uid: isize,
+    pub assigned_by_uid: Option<isize>,
+    pub checked: isize,
+    pub child_order: isize,
+    pub collapsed: isize,
+    pub content: String,
+    pub date_added: String,
+    pub date_completed: Option<String>,
+    pub day_order: isize,
+    pub description: String,
+    pub due: Option<ItemDue>,
+    pub has_more_notes: bool,
+    pub id: isize,
+    pub in_history: isize,
+    pub is_deleted: isize,
+    pub labels: Vec<isize>,
+    pub parent_id: Option<isize>,
+    pub priority: isize,
+    pub project_id: isize,
+    pub responsible_uid: Option<isize>,
+    pub section_id: Option<isize>,
+    pub sync_id: Option<isize>,
+    pub user_id: isize,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct ItemDue {
+    pub date: String,
+    pub is_recurring: bool,
+    pub lang: String,
+    pub string: String,
+    pub timezone: Option<String>,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Cache {
     pub filters: Vec<Filter>,
+    pub items: Vec<Item>,
 }
 
 pub fn read() -> Cache {
