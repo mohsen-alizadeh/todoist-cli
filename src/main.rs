@@ -5,6 +5,7 @@ use clap::{App, AppSettings, Arg, SubCommand};
 use env_logger;
 use log::{debug, info};
 
+mod cache;
 mod client;
 mod commands;
 
