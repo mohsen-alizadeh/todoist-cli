@@ -10,6 +10,13 @@ mod commands;
 
 use commands::{filters, labels, projects, tasks};
 
+#[derive(Debug, PartialEq)]
+pub enum Format {
+    Json,
+    AsciiTable,
+    Text,
+}
+
 fn main() {
     env_logger::init();
 
@@ -30,13 +37,29 @@ fn main() {
         .subcommand(SubCommand::with_name("labels").about("List of labels"))
         .subcommand(SubCommand::with_name("sync").about("sync with Todoist"))
         .subcommand(SubCommand::with_name("filters").about("List of filters"))
+        .arg(Arg::with_name("json").short("j").long("json"))
+        .arg(Arg::with_name("text").short("t").long("text"))
+        .arg(
+            Arg::with_name("assci-table")
+                .short("a")
+                .long("assci-table")
+                .help("Prints assci table"),
+        )
         .get_matches();
+
+    let format = if app.is_present("json") {
+        Format::Json
+    } else if app.is_present("text") {
+        Format::Text
+    } else {
+        Format::AsciiTable
+    };
 
     match app.subcommand() {
         ("list", Some(_)) => tasks::list(),
         ("filters", Some(_)) => filters::list(),
         ("projects", Some(_)) => projects::list(),
-        ("labels", Some(_)) => labels::list(),
+        ("labels", Some(_)) => labels::list(format),
         ("show", Some(args)) => {
             let id: isize = args.value_of("task_id").unwrap().parse().unwrap();
             tasks::show(id)
