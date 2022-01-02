@@ -56,9 +56,9 @@ fn main() {
     };
 
     match app.subcommand() {
-        ("list", Some(_)) => tasks::list(),
-        ("filters", Some(_)) => filters::list(),
-        ("projects", Some(_)) => projects::list(),
+        ("list", Some(_)) => tasks::list(format),
+        ("filters", Some(_)) => filters::list(format),
+        ("projects", Some(_)) => projects::list(format),
         ("labels", Some(_)) => labels::list(format),
         ("show", Some(args)) => {
             let id: isize = args.value_of("task_id").unwrap().parse().unwrap();

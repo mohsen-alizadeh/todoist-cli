@@ -1,16 +1,30 @@
+use crate::cache;
+use crate::Format;
 use prettytable::{format, Table};
 
-use crate::cache;
+pub fn list(format: Format) {
+    match format {
+        Format::AsciiTable | Format::Text => {
+            let mut table = Table::new();
 
-pub fn list() {
-    let mut table = Table::new();
-    table.set_format(*format::consts::FORMAT_NO_LINESEP_WITH_TITLE);
+            if format == Format::AsciiTable {
+                table.set_format(*format::consts::FORMAT_NO_LINESEP_WITH_TITLE);
+                table.set_titles(row!["ID", "Name", "Color", "Favorite", "Query"]);
+            } else {
+                table.set_format(*format::consts::FORMAT_CLEAN);
+            }
 
-    table.set_titles(row!["ID", "Name", "Color", "Favorite", "Query"]);
+            for filter in cache::read().filters {
+                table.add_row(row![filter.id, filter.name, filter.color, filter.query]);
+            }
 
-    for filter in cache::read().filters {
-        table.add_row(row![filter.id, filter.name, filter.color, filter.query]);
+            table.printstd();
+        }
+        Format::Json => {
+            println!(
+                "{}",
+                serde_json::to_string_pretty(&cache::read().filters).unwrap()
+            );
+        }
     }
-
-    table.printstd();
 }

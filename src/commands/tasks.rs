@@ -1,18 +1,33 @@
 use prettytable::{format, Table};
 
 use crate::cache;
+use crate::Format;
 
-pub fn list() {
-    let mut table = Table::new();
-    table.set_format(*format::consts::FORMAT_NO_LINESEP_WITH_TITLE);
+pub fn list(format: Format) {
+    match format {
+        Format::AsciiTable | Format::Text => {
+            let mut table = Table::new();
 
-    table.set_titles(row!["Task ID", "Content"]);
+            if format == Format::AsciiTable {
+                table.set_format(*format::consts::FORMAT_NO_LINESEP_WITH_TITLE);
+                table.set_titles(row!["Task ID", "Content"]);
+            } else {
+                table.set_format(*format::consts::FORMAT_CLEAN);
+            }
 
-    for task in cache::read().items {
-        table.add_row(row![task.id, task.content]);
+            for task in cache::read().items {
+                table.add_row(row![task.id, task.content]);
+            }
+
+            table.printstd();
+        }
+        Format::Json => {
+            println!(
+                "{}",
+                serde_json::to_string_pretty(&cache::read().items).unwrap()
+            );
+        }
     }
-
-    table.printstd();
 }
 
 pub fn show(task_id: isize) {
